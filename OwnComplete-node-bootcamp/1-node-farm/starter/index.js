@@ -3,6 +3,8 @@ const http=require('http');
 const url=require('url');
 
 
+ const slugify=  require('slugify');
+
 // own moduel
 
  const replaceTemplate= require('./modules/replaceTemplate')
@@ -62,6 +64,11 @@ const tempProduct=fs.readFileSync(`${__dirname}/templates/template-product.html`
 
      const  dataObj= JSON.parse(data);
 
+ const slugs=dataObj.map(ele=> slugify(ele.productName,{lower:true }) )
+
+
+     
+
  const server=http.createServer((req,res)=>{
    
        
@@ -74,7 +81,7 @@ const tempProduct=fs.readFileSync(`${__dirname}/templates/template-product.html`
 
           res.writeHead(200,{'Content-type':'text/html' });
 
-          
+
           // tempCard
       const cardsHtml= dataObj.map(ele=>  replaceTemplate(tempCard,ele)).join('');
 
