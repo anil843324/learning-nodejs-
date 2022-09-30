@@ -1,5 +1,4 @@
 const express = require("express");
-
 // interview questoon  what is path module
 // anser ;-> it helps to access  folder of your project 
 const path=require('path');
@@ -7,8 +6,11 @@ const path=require('path');
 
 const app = express();
 
+
 const publicPath=path.join(__dirname,'public')
 
+
+ app.set('view engine','ejs');
 // given folder path
 //  console.log(__dirname);
 // what is static mehtod 
@@ -37,6 +39,17 @@ app.get('/contact',(_,res)=>{
 app.get('/help',(_,res)=>{
 
     res.sendFile( `${publicPath}/help.html`)
+
+})
+
+app.get('/profile',(_,res)=>{
+
+      const user={
+         name:'anil kumar',
+         email:"anilkrsingh142200@gmail.com",
+         city:"Patna"
+      }
+    res.render('profile',{user})
 
 })
 
