@@ -13,7 +13,39 @@ const publicPath=path.join(__dirname,'public')
 //  console.log(__dirname);
 // what is static mehtod 
 // anser:-> it helps to load your static page or static content
-app.use(express.static(publicPath))
+// app.use(express.static(publicPath))
+
+app.get('',(_,res)=>{
+
+     res.sendFile( `${publicPath}/index.html`)
+
+
+})
+
+app.get('/about',(_,res)=>{
+
+    res.sendFile( `${publicPath}/about.html`)
+
+})
+
+app.get('/contact',(_,res)=>{
+
+    res.sendFile( `${publicPath}/contact.html`)
+
+})
+
+app.get('/help',(_,res)=>{
+
+    res.sendFile( `${publicPath}/help.html`)
+
+})
+
+app.get('*',(_,res)=>{
+
+    res.sendFile( `${publicPath}/pageNotFound.html`)
+
+})
+
 
 
 app.listen(8080);
