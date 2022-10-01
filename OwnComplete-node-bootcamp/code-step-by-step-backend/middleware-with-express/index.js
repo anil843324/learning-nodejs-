@@ -10,15 +10,15 @@ const dbConnect = require("./mongodb");
 
 //  console.log(dbConnection())
 
-const main = async () => {
-  let data = await dbConnect();
+// const main = async () => {
+//   let data = await dbConnect();
 
-  data = await data.find().toArray();
+//   data = await data.find().toArray();
 
-  console.log(data);
-};
+//   console.log(data);
+// };
 
-main();
+// main();
 
 // middleware
 // const express=require('express');
