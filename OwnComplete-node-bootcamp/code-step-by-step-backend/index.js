@@ -1,94 +1,57 @@
 const express = require("express");
 // interview questoon  what is path module
-// anser ;-> it helps to access  folder of your project 
-const path=require('path');
-
+// anser ;-> it helps to access  folder of your project
+const path = require("path");
 
 const app = express();
 
+const publicPath = path.join(__dirname, "public");
 
-const publicPath=path.join(__dirname,'public')
-
-
- app.set('view engine','ejs');
+app.set("view engine", "ejs");
 // given folder path
 //  console.log(__dirname);
-// what is static mehtod 
+// what is static mehtod
 // anser:-> it helps to load your static page or static content
 // app.use(express.static(publicPath))
 
-app.get('',(_,res)=>{
+app.get("", (_, res) => {
+  res.sendFile(`${publicPath}/index.html`);
+});
 
-     res.sendFile( `${publicPath}/index.html`)
+app.get("/about", (_, res) => {
+  res.sendFile(`${publicPath}/about.html`);
+});
 
+app.get("/contact", (_, res) => {
+  res.sendFile(`${publicPath}/contact.html`);
+});
 
-})
+app.get("/help", (_, res) => {
+  res.sendFile(`${publicPath}/help.html`);
+});
 
-app.get('/about',(_,res)=>{
+app.get("/profile", (_, res) => {
+  const user = {
+    name: "anil kumar",
+    email: "anilkrsingh142200@gmail.com",
+    city: "Patna",
+    skills: ["javascript",  "React", "node.js" ,"tailwind" ,"MUI"],
+  };
+  res.render("profile", { user });
+});
 
-    res.sendFile( `${publicPath}/about.html`)
+app.get("/login", (_, res) => {
+    res.render("login");
+  });
 
-})
-
-app.get('/contact',(_,res)=>{
-
-    res.sendFile( `${publicPath}/contact.html`)
-
-})
-
-app.get('/help',(_,res)=>{
-
-    res.sendFile( `${publicPath}/help.html`)
-
-})
-
-app.get('/profile',(_,res)=>{
-
-      const user={
-         name:'anil kumar',
-         email:"anilkrsingh142200@gmail.com",
-         city:"Patna"
-      }
-    res.render('profile',{user})
-
-})
-
-app.get('*',(_,res)=>{
-
-    res.sendFile( `${publicPath}/pageNotFound.html`)
-
-})
-
-
+app.get("*", (_, res) => {
+  res.sendFile(`${publicPath}/pageNotFound.html`);
+});
 
 app.listen(8080);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // app.get("", (req, res) => {
-//   res.send(` 
+//   res.send(`
 //     <h1> Welcome , to Home page </h1>
 //     <a href="/about">Go to about page</a>
 //     `);
