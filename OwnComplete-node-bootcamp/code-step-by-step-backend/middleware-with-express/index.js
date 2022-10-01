@@ -1,28 +1,24 @@
-const { MongoClient } = require("mongodb");
+const dbConnect = require("./mongodb");
 
-const url = "mongodb://localhost:27017";
+// dbConnect().then((resp)=>{
 
-const database = "e-commerce";
+//     resp.find().toArray().then((data)=>{
+//        console.log(data)
+//     })
 
-const clinet = new MongoClient(url);
+// })
 
-async function getData() {
+//  console.log(dbConnection())
 
-  let result = await clinet.connect();
+const main = async () => {
+  let data = await dbConnect();
 
-  let db = result.db(database);
+  data = await data.find().toArray();
 
-  let collection = db.collection("products");
+  console.log(data);
+};
 
-  let response = await collection.find({}).toArray();
-
-  console.log(response);
-}
-
-getData();
-
-
-
+main();
 
 // middleware
 // const express=require('express');
