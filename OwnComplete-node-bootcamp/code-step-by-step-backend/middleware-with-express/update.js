@@ -13,4 +13,4 @@ const updateData= async()=>{
 
 }
 
-updateData()
+// updateData()
