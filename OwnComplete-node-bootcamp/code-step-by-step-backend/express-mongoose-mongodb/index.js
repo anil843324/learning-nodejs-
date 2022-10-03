@@ -28,10 +28,19 @@ const savInDB = async () => {
   console.log(result);
 };
 
-savInDB();
+// savInDB();
 
 // update data in mongodb
 
-// const updateInDB=()=>{
+const updateInDB = async () => {
+  const productsModel = mongoose.model("products", productSche);
 
-// }
+  let data = await productsModel.updateOne(
+    { name: "not 20" },
+    { $set: { price: 450 ,name:'not 9' } }
+  );
+
+  console.log(data);
+};
+
+// updateInDB()
