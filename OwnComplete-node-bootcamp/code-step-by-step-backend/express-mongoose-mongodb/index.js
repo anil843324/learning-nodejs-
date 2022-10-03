@@ -1,24 +1,24 @@
 const mongoose = require("mongoose");
 
-  // shemas
-  const productSche = new mongoose.Schema({
-    name: String,
-    price: Number,
-    brand: String,
-    category: String,
-  });
+// mongoose through connect with mongodb
+mongoose.connect("mongodb://localhost:27017/e-commerce");
 
+// shemas
+const productSche = new mongoose.Schema({
+  name: String,
+  price: Number,
+  brand: String,
+  category: String,
+});
 
+// sava data in mongodb
 const savInDB = async () => {
-
-  await mongoose.connect("mongodb://localhost:27017/e-commerce");
-
   // model
   const productsModel = mongoose.model("products", productSche);
 
   let data = new productsModel({
-    name: " vivo v20",
-    price: 20000,
+    name: " vivo v11",
+    price: 10000,
     brand: "vivo",
     category: "mobile",
   });
@@ -28,5 +28,10 @@ const savInDB = async () => {
   console.log(result);
 };
 
-// savInDB()
+savInDB();
 
+// update data in mongodb
+
+// const updateInDB=()=>{
+
+// }
