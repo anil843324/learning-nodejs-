@@ -39,8 +39,36 @@ const updateInDB = async () => {
     { name: "not 20" },
     { $set: { price: 450 ,name:'not 9' } }
   );
-
   console.log(data);
 };
 
 // updateInDB()
+
+
+// delte in mongodb
+
+const deleteInDB= async()=>{
+
+    const productsModel = mongoose.model("products", productSche);
+
+    let data= await productsModel.deleteOne({name:"not 9"})
+     
+    console.log(data);
+
+}
+
+// deleteInDB()
+
+
+
+const findInDB= async()=>{
+
+    const productsModel = mongoose.model("products", productSche);
+
+    let data= await productsModel.find({name:"s22"})
+     
+    console.log(data);
+
+}
+
+findInDB()
