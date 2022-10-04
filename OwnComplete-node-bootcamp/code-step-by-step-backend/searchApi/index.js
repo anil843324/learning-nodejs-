@@ -15,7 +15,9 @@ app.get("/search/:key", async (req,res)=>{
     {
       "$or":[
 
-        { "name":{$regex:req.params.key}}
+        { "name":{$regex:req.params.key}},
+        { "brand":{$regex:req.params.key}},
+        { "category":{$regex:req.params.key}}
       ]
     }
 
