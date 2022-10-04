@@ -1,25 +1,54 @@
-const express=require('express');
+const express = require("express");
 
-require('./config');
+require("./config");
 
-const product=require('./products')
+const product = require("./products");
 
- const app=express();
+const app = express();
 
 // post method
 
-app.use(express.json())
+app.use(express.json());
 
-app.post('/create', async (req,res)=>{
+app.post("/create", async (req, res) => {
+  let data = new product(req.body);
 
-    let data= new product(req.body);
+  let result = await data.save();
 
-    let result= await data.save()
+  console.log(result);
 
-  console.log(result)
+  res.send(result);
+});
 
-  res.send(result)
+// get data
+app.get("/list", async (req, res) => {
+  let data = await product.find();
 
- })
+  res.send(data);
+});
 
-   app.listen(8000)
+// delete data
+app.delete("/delete/:_id", async (req, res) => {
+  console.log(req.params);
+
+  let data = await product.deleteOne(req.params);
+
+  res.send(data);
+});
+
+//update data
+
+app.put("/update/:_id", async (req, res) => {
+  console.log(req.params);
+
+  let data = await product.updateOne(
+    req.params, // condition
+    { $set: req.body } // $set updated data
+  );
+
+  res.send(data);
+});
+
+app.listen(8000, () => {
+  console.log(`port is listing ${8000}...`);
+});
