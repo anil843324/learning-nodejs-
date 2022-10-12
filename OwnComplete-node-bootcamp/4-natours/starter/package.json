@@ -1,6 +1,5 @@
 {
   "name": "starter",
-  "type":"module",
   "version": "1.0.0",
   "description": "node,express and mongodb",
   "main": "app.js",
