@@ -1,66 +1,81 @@
 
+//REPL
+
+// Read-Eval-Print-loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Events Emitter
 
-const express=require('express')
+// const express=require('express')
 
-const app=express();
+// const app=express();
 
-const EventEmitter=require('events');
+// const EventEmitter=require('events');
 
-const event= new EventEmitter();
+// const event= new EventEmitter();
 
-let count=0;
-event.on("countAPI",()=>{
+// let count=0;
+// event.on("countAPI",()=>{
 
-   count++;
-   console.log( "event Called",count);
-})
-
-
-app.get("/",(req,res)=>{
-
-  res.send('api called')
-  event.emit("countAPI")
-})
-
-app.get("/search",(req,res)=>{
-
-  res.send(' search api called')
-
-  event.emit("countAPI")
-})
-
-app.get("/update",(req,res)=>{
-
-  res.send(' update api called')
-
-  event.emit("countAPI")
-
-})
+//    count++;
+//    console.log( "event Called",count);
+// })
 
 
+// app.get("/",(req,res)=>{
 
-app.listen(8000,()=>{
+//   res.send('api called')
+//   event.emit("countAPI")
+// })
 
-   console.log(`serve listen on ${8000}`)
-})
+// app.get("/search",(req,res)=>{
+
+//   res.send(' search api called')
+
+//   event.emit("countAPI")
+// })
+
+// app.get("/update",(req,res)=>{
+
+//   res.send(' update api called')
+
+//   event.emit("countAPI")
+
+// })
 
 
 
+// app.listen(8000,()=>{
+
+//    console.log(`serve listen on ${8000}`)
+// })
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////
+////////////////////////////////////////////////////
 
 
 
