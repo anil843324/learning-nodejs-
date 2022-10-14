@@ -14,7 +14,9 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
-app.get('/api/v1/tours', (req, res) => {
+// Refectring of route
+
+const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'suceess',
     result: tours.length,
@@ -22,10 +24,9 @@ app.get('/api/v1/tours', (req, res) => {
       tours,
     },
   });
-});
+};
 
-// get data through id
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTour = (req, res) => {
   console.log(req.params.id);
   const id = req.params.id * 1;
 
@@ -44,11 +45,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
       message: 'Invalid ID',
     });
   }
-});
+};
 
-// post request
-
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
 
   const newTour = Object.assign({ id: newId }, req.body);
@@ -66,57 +65,58 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
-});
+};
 
-
-
-// updated methcod but actually not work
-
-app.patch('/api/v1/tours/:id', (req,res)=>{
-
-    if(req.params.id*1 > tours.length){
-        return res.status(404).json({
-          status:'fail',
-          message:'Invalid Id'
-        })
-    }
-
-     res.status(200).json({
-       status:'success',
-       data:{
-         tour:'<Updated tour here....>'
-       }
-     })
-
-
-})
-
-// delete method
-
-app.delete('/api/v1/tours/:id', (req,res)=>{
-
-  if(req.params.id*1 > tours.length){
-      return res.status(404).json({
-        status:'fail',
-        message:'Invalid Id'
-      })
+const updateTour = (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid Id',
+    });
   }
 
-   res.status(204).json({
-     status:'success',
-     data:null
-   })
+  res.status(200).json({
+    status: 'success',
+    data: {
+      tour: '<Updated tour here....>',
+    },
+  });
+};
 
+const deleteTour = (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid Id',
+    });
+  }
 
-})
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+};
 
+// app.get('/api/v1/tours', getAllTours);
 
+// app.get('/api/v1/tours/:id', getTour);
 
+// app.post('/api/v1/tours', createTour);
 
+// app.patch('/api/v1/tours/:id', updateTour);
 
+// app.delete('/api/v1/tours/:id', deleteTour);
 
+//////////////////////////////////////
+//////////////////////////////////////
 
+app.route('/api/v1/tours').get(getAllTours).post(createTour);
 
+app
+  .route('/api/v1/tours/:id')
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
 
 const port = 5000;
 app.listen(port, () => {
