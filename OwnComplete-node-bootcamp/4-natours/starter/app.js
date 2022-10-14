@@ -1,12 +1,10 @@
 const express = require('express');
 
-
-
 const morgan = require('morgan');
 
-const tourRouter=require('./routes/tourRoutes')
+const tourRouter = require('./routes/tourRoutes');
 
-const userRouter=require('./routes/userRoutes')
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -15,6 +13,8 @@ const app = express();
 app.use(morgan('dev'));
 
 app.use(express.json());
+
+app.use( express.static(`${__dirname}/public`))
 
 // v1= verson of api
 
@@ -37,4 +37,4 @@ app.use('/api/v1/tours', tourRouter);
 
 app.use('/api/v1/users', userRouter);
 
- module.exports=app;
+module.exports = app;
