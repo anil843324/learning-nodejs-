@@ -4,8 +4,8 @@
   "description": "node,express and mongodb",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon server.js",
-    "start:prod":"NODE_ENV=production nodemon server.js",
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "anil",
@@ -19,6 +19,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "express": "^4.18.2",
+    "mongoose": "^5.13.15",
     "morgan": "^1.10.0",
     "prettier": "^2.7.1"
   },
