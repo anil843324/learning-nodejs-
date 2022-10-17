@@ -2,6 +2,16 @@ const Tour = require('../models/tourModel');
 
 //handler
 
+ exports.aliasTopTours= (req,res,next)=>{
+
+    req.query.limit='5';
+    req.query.sort='-ratingsAverage,price';
+    req.query.fields='name,price,ratingsAverage,summary,difficulty';
+  next();
+ }
+
+
+
 exports.getAllTours = async (req, res) => {
   try {
     console.log(req.query);
@@ -19,7 +29,7 @@ exports.getAllTours = async (req, res) => {
     /*
    { difficulty : "easy" , duration :{$gte:5}}
     { difficulty : "easy" , duration :{gte:'5}}
-*/
+   */
 
     let query = Tour.find(JSON.parse(queryStr));
 
@@ -32,15 +42,27 @@ exports.getAllTours = async (req, res) => {
     }
 
     // 3  Field limiting
-   if(req.query.fields){
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
 
-     const fields=req.query.fields.split(',').join(' ')
-     query=query.select(fields)
-   }else{
+  // 4 Pagination
+  
+   const page= req.query.page * 1 || 1 ;
+   const limit=req.query.limit*1 || 100;
+   const  skip= (page-1)*limit;
 
-     query=query.select('-__v');
-   }
-     
+  // page=2&limit=10 , 1-10 page 1, 11-20 page 2 , 21-30 page 3
+    query=query.skip(skip).limit(limit);
+
+    if(req.query.page){
+       const numTours= await Tour.countDocuments();
+       if(skip>numTours) throw new Error('This page does not exit')
+    }
+
     // Execute query
     const tours = await query;
 
