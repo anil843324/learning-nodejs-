@@ -205,22 +205,6 @@
             "2022-01-16,10:00",
             "2022-12-12,10:00"
         ]
-    },
-    {
-        "id": 9,
-        "name": "Test Tour",
-        "duration": 10,
-        "difficulty": "easy"
-    },
-    {
-        "id": 10,
-        "name": "Test Tour 1",
-        "duration": 5,
-        "difficulty": "hard"
-    },
-    {
-        "id": 11,
-        "name": "anil",
-        "price": 123
     }
+   
 ]
