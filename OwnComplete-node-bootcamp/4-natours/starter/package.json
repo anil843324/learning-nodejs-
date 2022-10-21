@@ -6,11 +6,12 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
-    "debug":"ndb server.js"
+    "debug": "ndb server.js"
   },
   "author": "anil",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "eslint": "^8.25.0",
     "eslint-config-airbnb": "^19.0.4",
