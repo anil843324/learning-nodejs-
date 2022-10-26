@@ -5,6 +5,7 @@ const sendEmail = async (options) => {
   const transpoter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
+    secure: false,
     auth: {
       user: process.env.EMAIL_USERNAME,
       pass: process.env.EMAIL_PASSWORD,
@@ -18,7 +19,7 @@ const sendEmail = async (options) => {
     to: options.email,
     subject: options.subject,
     text: options.message,
-    //  html:
+    html: "<b>Hello world?</b>"
   };
 
   // 3 Actually send the email

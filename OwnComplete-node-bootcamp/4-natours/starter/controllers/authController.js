@@ -20,6 +20,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role,
+    
   });
 
   const token = signToken(newUser._id);
@@ -130,7 +131,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 2. Generate the random reset token
 
   const resetToken = user.createPasswordResetToken();
-
+  await user.save({ validateBeforeSave: false });
   // 3. Send it to user's email
 
   const resetURL = `${req.protocol}://${req.get(
@@ -143,12 +144,12 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await sendEmail({
       email: user.email,
       subject: 'Your password reset token (valid for 10 min)',
-      message,
+      message
     });
 
     res.status(200).json({
       status: 'Success',
-      message: 'Token send to email!',
+      message: 'Token send to email!'
     });
   } catch (err) {
     user.passwordResetToken = undefined;
