@@ -67,16 +67,12 @@ exports.getOne = (Model, popOptions) =>
     });
   });
 
-
-exports.getAll=Model=>catchAsync(async (req, res,next) => {
-
+exports.getAll = (Model) =>
+  catchAsync(async (req, res, next) => {
     // To allow for nested Get reviews on tour(hack)
-    let filter={}
+    let filter = {};
 
-    if(req.params.tourId) filter={tour:req.params.tourId}
-
-
-
+    if (req.params.tourId) filter = { tour: req.params.tourId };
 
     // Execute query
     const features = new APIFeatures(Model.find(filter), req.query)
@@ -85,13 +81,13 @@ exports.getAll=Model=>catchAsync(async (req, res,next) => {
       .limitFields()
       .pagination();
     const doc = await features.query;
-  
+
     // Send response
     res.status(200).json({
       status: 'suceess',
       result: doc.length,
       data: {
-       data: doc
+        data: doc,
       },
     });
-  });  
+  });
